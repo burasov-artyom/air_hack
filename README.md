@@ -1,3 +1,5 @@
-> cd air_hack
+> **~$** git clone https://github.com/BurasovArtem/air_hack.git
 
-> npm install
+> **~$** cd air_hack
+
+> **~$** npm install
