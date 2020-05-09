@@ -3,9 +3,7 @@
     "name": "air_hack",
     "slug": "air_hack",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,6 +21,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.ShineSquad.airHack",
+      "versionCode": 1
     }
   }
 }

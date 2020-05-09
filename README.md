@@ -3,3 +3,5 @@
 > **~$** cd air_hack
 
 > **~$** npm install
+
+> **~$** npm start

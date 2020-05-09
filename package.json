@@ -25,11 +25,6 @@
     "react-native-linear-gradient": "^2.5.6",
     "react-native-web": "~0.11.7"
   },
-  "rnpm": {
-    "assets": [
-      "./assets/fonts/"
-    ]
-  },
   "devDependencies": {
     "babel-preset-expo": "~8.1.0",
     "@babel/core": "^7.8.6"
