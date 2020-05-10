@@ -18,13 +18,15 @@ export default class HomeScreen extends React.Component {
 	  };
   }
 
-  connect = async () => {
-    var myRequest = new Request('http://192.168.0.106/AIR_hack/global/global_log.txt');
-    fetch(myRequest , { mode: 'no-cors', credentials: 'omit' })
-      .then(response => this.setState({data: response.text()}));
+  connect = () => {
+    if (fetch('https://shinesquad.ru/avia/global.php')) {
+      alert('Подключение выполнено');
+    } else {
+      alert('Ошибка подключения');
+    }
   }
   synchronize = () => {
-    fetch('http://192.168.0.106/AIR_hack/local.php?add_updates=%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C+%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F')
+    fetch('https://shinesquad.ru/avia/local.php?add_updates=%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C+%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F')
   }
 
   render() {
