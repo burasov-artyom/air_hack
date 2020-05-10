@@ -20,37 +20,48 @@ export default class HomeScreen extends React.Component {
 
   connect = () => {
     if (fetch('https://shinesquad.ru/avia/global.php')) {
+      var myRequest = new Request('https://shinesquad.ru/avia/global/global_log.txt');
+      fetch(myRequest , { mode: 'no-cors', credentials: 'omit' })
+        .then(response => this.setState({data: response.text()}));
       alert('Подключение выполнено');
     } else {
       alert('Ошибка подключения');
     }
   }
   synchronize = () => {
-    fetch('https://shinesquad.ru/avia/local.php?add_updates=%D0%9F%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C+%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F')
+    var xhr = new XMLHttpRequest();
+    var body = 'data=' + encodeURIComponent(this.state.data['_55']);
+
+    xhr.open("POST", 'https://shinesquad.ru/avia/update_from_device.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.send(body);
+
+    alert('Данные синхронизированы')
   }
 
   render() {
     return (
-      <View style={styles.container} >
-        <StatusBar backgroundColor="#4E1472" barStyle="light-content" />
-        <ClassicHeader
-            width={360}
-            leftComponentDisable
-            rightComponentDisable
-            height={70}
-            backgroundColor={'#6A1B9A'}
-            leftComponent= {
-              <Text style={styles.headerText}>ПВЗ №42</Text>
-            }
-          />
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.btn} onPress={this.connect}>
-              <Text style={styles.btnText}>Подключиться к серверу</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btn} onPress={this.synchronize}>
-              <Text style={styles.btnText}>Синхронизировать данные</Text>
-            </TouchableOpacity>
-          </View>
+      <View style={styles.container}>
+          <StatusBar backgroundColor="#4E1472" barStyle="light-content" />
+          <ClassicHeader
+              width={500}
+              leftComponentDisable
+              rightComponentDisable
+              height={70}
+              backgroundColor={'#6A1B9A'}
+              leftComponent= {
+                <Text style={styles.headerText}>ПВЗ №42</Text>
+              }
+            />
+            <View style={styles.buttonsContainer}>
+              <TouchableOpacity style={styles.btn} onPress={this.connect}>
+                <Text style={styles.btnText}>Подключиться к серверу</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn} onPress={this.synchronize}>
+                <Text style={styles.btnText}>Синхронизировать данные</Text>
+              </TouchableOpacity>
+            </View>
       </View>
     );
   }
@@ -60,12 +71,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   headerText: {
     fontSize: 30,
     color: 'white',
     fontFamily: 'Roboto',
-    marginLeft: 20,
+    marginLeft: 90,
     marginTop: -10
   },
   buttonsContainer: {
